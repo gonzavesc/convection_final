@@ -29,6 +29,6 @@ class inlet{
         double u(const double&);
         double get_a();
 };
-//double inlet(const double&x);
+
 void def_bnd(std::vector<std::vector<double>>& ap, std::vector<std::vector<double>>& ae,  std::vector<std::vector<double>>& aw,  std::vector<std::vector<double>>& an, std::vector<std::vector<double>>& as,
              std::vector<std::vector<double>>& ap0,  std::vector<std::vector<double>>& b, inlet& in,  differential& diff);

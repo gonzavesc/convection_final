@@ -25,13 +25,6 @@
     #include "boundary.hpp"
     #define INCLUDE_BND
 #endif
-/*
-double inlet(const double&x)
-{
-    double T;
-    T = 1 + tanh((2 * x + 1) * alpha);
-    return T;
-}*/
 inlet::inlet(const double& a)
 {
     alpha = a;
