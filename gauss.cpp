@@ -33,6 +33,9 @@
 
 void copyMatrix(std::vector<std::vector<double>>& phi_p, const std::vector<std::vector<double>>& phi)
 {
+    int Nx ,Ny;
+    Nx = phi[0].size() - 1;
+    Ny = phi.size() - 1;
     for (int i = 0; i <= Ny; i++)
     {
         for (int j = 0; j <= Nx; j++)
@@ -53,7 +56,9 @@ void gauss::solver(std::vector<std::vector<double>>& phi, const std::vector<std:
             const std::vector<std::vector<double>>& ap0, const std::vector<std::vector<double>>& b)
 {
     double rms,prev;
-    int i,j;
+    int i,j, Ny, Nx;
+    Ny = phi.size() - 1;
+    Nx=phi[0].size() - 1;
     rms = 1 + err;
     while (rms > err)
     {
@@ -90,6 +95,6 @@ void gauss::solver(std::vector<std::vector<double>>& phi, const std::vector<std:
             phi[i][j] = (b[i][j] + ap0[i][j] * phi_p[i][j]) / ap[i][j];
             rms = std::max(rms, std::abs(phi[i][j] - prev));
         }
-        std::cout << rms << std::endl;
+        //std::cout << rms << std::endl;
     }
 }

@@ -26,3 +26,34 @@ std::vector<double> readfiledat()
     }
     return v;
 }
+properties::properties(const double& a, const double& b)
+{
+    rho = a;
+    gamma = b;
+}
+double properties::get_rho()
+{
+    return rho;
+}
+double properties::get_gamma()
+{
+    return gamma;
+}
+
+differential::differential(const double& a, const double& b, const double& c)
+{
+    dx = a; dy = b; dt = c;
+}
+double differential::get_dx()
+{
+    return dx;
+}
+
+double differential::get_dy()
+{
+    return dy;
+}
+double differential::get_dt()
+{
+    return dt;
+}

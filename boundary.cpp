@@ -25,19 +25,37 @@
     #include "boundary.hpp"
     #define INCLUDE_BND
 #endif
+/*
 double inlet(const double&x)
 {
     double T;
     T = 1 + tanh((2 * x + 1) * alpha);
     return T;
+}*/
+inlet::inlet(const double& a)
+{
+    alpha = a;
+}
+double inlet::u(const double& x)
+{
+    double T;
+    T = 1 + tanh((2 * x + 1) * alpha);
+    return T;
+}
+double inlet::get_a()
+{
+    return alpha;
 }
 void def_bnd(std::vector<std::vector<double>>& ap, std::vector<std::vector<double>>& ae,  std::vector<std::vector<double>>& aw,  std::vector<std::vector<double>>& an, std::vector<std::vector<double>>& as,
-             std::vector<std::vector<double>>& ap0,  std::vector<std::vector<double>>& b)
+             std::vector<std::vector<double>>& ap0,  std::vector<std::vector<double>>& b,inlet& in, differential& diff)
 {
     double A,x;
-    A = 1 - tanh(alpha);
+    A = 1 - tanh(in.get_a());
     int j = 0;
     int i =0;
+    int Nx, Ny;
+    Ny = ap.size() - 1;
+    Nx = ap[0].size() - 1;
     for ( i = 0; i <= Ny; i++)
     {
         ap[i][j] = 1; ae[i][j] = 0; aw[i][j] = 0; an[i][j] = 0; as[i][j] = 0; ap0[i][j] = 0; b[i][j] = A;
@@ -59,8 +77,8 @@ void def_bnd(std::vector<std::vector<double>>& ap, std::vector<std::vector<doubl
     }
     for (j = 0; j <= Nx / 2; j++)
     {
-        x = (j - Nx / 2) * diff[0];
-        ap[i][j] = 1; ae[i][j] = 0; aw[i][j] = 0; an[i][j] = 0; as[i][j] = 0; ap0[i][j] = 0; b[i][j] = inlet(x);
+        x = (j - Nx / 2) * diff.get_dx();
+        ap[i][j] = 1; ae[i][j] = 0; aw[i][j] = 0; an[i][j] = 0; as[i][j] = 0; ap0[i][j] = 0; b[i][j] = in.u(x);
     }
 
 }

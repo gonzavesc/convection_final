@@ -28,33 +28,39 @@ double v(const double&x, const double& y)
     return vv;
 }
 
-void set_F(std::vector<std::vector<double>>& Fe, std::vector<std::vector<double>>& Fw, std::vector<std::vector<double>>& Fn, std::vector<std::vector<double>>& Fs)
+void set_F(std::vector<std::vector<double>>& Fe, std::vector<std::vector<double>>& Fw, std::vector<std::vector<double>>& Fn, std::vector<std::vector<double>>& Fs, properties& prop, differential& diff)
 {
     double x,y;
+    int Nx, Ny;
+    Ny = Fe.size() - 1;
+    Nx = Fe[0].size() - 1;
     for (int i = 0; i <= Ny; i++)
     {
         for (int j = 0; j <= Nx; j++)
         {
-            x = (j - Nx / 2) * diff[0];
-            y = i * diff[1];
-            Fe[i][j] = properties[0] * u(x + diff[0] / 2, y) * diff[1];
-            Fw[i][j] = properties[0] * u(x - diff[0] / 2, y) * diff[1];
-            Fn[i][j] = properties[0] * v(x, y + diff[1] / 2) * diff[0];
-            Fs[i][j] = properties[0] * v(x, y - diff[1] / 2) * diff[0];
+            x = (j - Nx / 2) * diff.get_dx();
+            y = i * diff.get_dy();
+            Fe[i][j] = prop.get_rho() * u(x + diff.get_dx() / 2, y) * diff.get_dy();
+            Fw[i][j] = prop.get_rho() * u(x - diff.get_dx() / 2, y) * diff.get_dy();
+            Fn[i][j] = prop.get_rho() * v(x, y + diff.get_dy() / 2) * diff.get_dx();
+            Fs[i][j] = prop.get_rho() * v(x, y - diff.get_dy() / 2) * diff.get_dx();
         }
     }
 }
 
-void set_D(std::vector<std::vector<double>>& De, std::vector<std::vector<double>>& Dw, std::vector<std::vector<double>>& Dn, std::vector<std::vector<double>>& Ds)
+void set_D(std::vector<std::vector<double>>& De, std::vector<std::vector<double>>& Dw, std::vector<std::vector<double>>& Dn, std::vector<std::vector<double>>& Ds, properties& prop, differential& diff)
 {
+    int Nx ,Ny;
+    Nx = De[0].size() - 1;
+    Ny = De.size() - 1;
     for (int i = 0; i <= Ny; i++)
     {
         for (int j = 0; j <= Nx; j++)
         {
-            De[i][j] = properties[1] * diff[1] / diff[0];
-            Dw[i][j] = properties[1] * diff[1] / diff[0];
-            Dn[i][j] = properties[1] * diff[0] / diff[1];
-            Ds[i][j] = properties[1] * diff[0] / diff[1];
+            De[i][j] = prop.get_gamma() * diff.get_dy() / diff.get_dx();
+            Dw[i][j] = prop.get_gamma() * diff.get_dy() / diff.get_dx();
+            Dn[i][j] = prop.get_gamma() * diff.get_dx() / diff.get_dy();
+            Ds[i][j] = prop.get_gamma() * diff.get_dx() / diff.get_dy();
         }
     }
 }
@@ -63,6 +69,9 @@ void set_P(std::vector<std::vector<double>>& Pe, std::vector<std::vector<double>
         const std::vector<std::vector<double>>& Fe, const std::vector<std::vector<double>>& Fw, const std::vector<std::vector<double>>& Fn, const std::vector<std::vector<double>>& Fs,
         const std::vector<std::vector<double>>& De, const std::vector<std::vector<double>>& Dw, const std::vector<std::vector<double>>& Dn, const std::vector<std::vector<double>>& Ds )
 {
+    int Nx ,Ny;
+    Nx = De[0].size() - 1;
+    Ny = De.size() - 1;
     for (int i = 0; i <= Ny; i++)
     {
         for (int j = 0; j <= Nx; j++)
@@ -74,13 +83,16 @@ void set_P(std::vector<std::vector<double>>& Pe, std::vector<std::vector<double>
         }
     }
 }
-void set_a0(std::vector<std::vector<double>>& ap0)
+void set_a0(std::vector<std::vector<double>>& ap0, properties& prop, differential& diff)
 {
+    int Nx ,Ny;
+    Nx = ap0[0].size() - 1;
+    Ny = ap0.size() - 1;
     for (int i = 0; i <= Ny; i++)
     {
         for (int j = 0; j <= Nx; j++)
         {
-            ap0[i][j] = properties[0] * diff[0] * diff[1] / diff[2];
+            ap0[i][j] = prop.get_rho() * diff.get_dx() * diff.get_dy() / diff.get_dt();
         }
     }
 }

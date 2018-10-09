@@ -6,5 +6,20 @@
 #include <new>
 
 std::vector<double> readfiledat();
-extern std::vector<double> properties, diff;
-extern int Nx, Ny;
+class properties{
+    private:
+        double rho,gamma;
+    public:
+        properties(const double&, const double&);
+        double get_rho();
+        double get_gamma();
+};
+class differential{
+    private:
+        double dx,dy,dt;
+    public:
+        differential(const double&, const double&, const double&);
+        double get_dx();
+        double get_dy();
+        double get_dt();
+};

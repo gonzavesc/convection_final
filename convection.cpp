@@ -32,20 +32,20 @@
     #define INCLUDE_GSS
 #endif
 
-std::vector<double> properties, diff;
-int Nx, Ny;
-double alpha;
+
+
+
 int main()
 {
     std::vector<double> dat;
-    int Method;
+    int Method, Nx, Ny;
     
     double tot_time(0), runtime;
     dat = readfiledat();
-    properties.push_back(dat[0]); properties.push_back(dat[1]);
-    diff.push_back(dat[5]); diff.push_back(dat[6]); diff.push_back(dat[7]);
-    Nx = dat[2] / diff[0]; Ny = dat[3] / diff[1];
-    alpha = dat[4];
+    properties prop(dat[0],dat[1]);
+    differential diff(dat[5], dat[6], dat[7]);
+    Nx = dat[2] / diff.get_dx(); Ny = dat[3] / diff.get_dy();
+    inlet in(dat[4]);
     Method = dat[10];
     runtime = dat[8];
     gauss Sol(dat[11]);
@@ -74,21 +74,21 @@ int main()
     std::vector<std::vector<double>> ap0(Ny + 1, std::vector<double>(Nx +1, 0));
     std::vector<std::vector<double>> b(Ny + 1, std::vector<double>(Nx +1, 0));
     
-    set_F(Fe, Fw, Fn, Fs);
-    set_D(De, Dw, Dn, Ds);
+    set_F(Fe, Fw, Fn, Fs, prop, diff);
+    set_D(De, Dw, Dn, Ds, prop, diff);
     set_P(Pe, Pw, Pn, Ps, Fe, Fw, Fn, Fs, De, Dw, Dn, Ds);
     set_a(ae, aw, an, as, Pe, Pw, Pn, Ps, Fe, Fw, Fn, Fs, De, Dw, Dn, Ds, Method);
     
-    set_a0(ap0);
+    set_a0(ap0, prop, diff);
     set_ap(ap, ae, aw, an, as, ap0, b);
-    def_bnd(ap, ae, aw, an, as, ap0, b);
-    
+    def_bnd(ap, ae, aw, an, as, ap0, b, in, diff);
     while (tot_time < runtime)
     {
-        tot_time+=diff[2];
+        tot_time+=diff.get_dt();
         copyMatrix(phi_p,phi);
-        //std::cout << tot_time << std::endl;
+        
         Sol.solver(phi, phi_p, ap, ae, aw, an, as, ap0, b);
+        std::cout << tot_time << std::endl;
     }
     exportarMatriu(phi);
 
