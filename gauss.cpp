@@ -41,8 +41,15 @@ void copyMatrix(std::vector<std::vector<double>>& phi_p, const std::vector<std::
         }
     }
 }
-
-void Gauss_seidel(std::vector<std::vector<double>>& phi, const std::vector<std::vector<double>>& phi_p, const std::vector<std::vector<double>>& ap, const std::vector<std::vector<double>>& ae, const std::vector<std::vector<double>>& aw, const std::vector<std::vector<double>>& an, const std::vector<std::vector<double>>& as,
+gauss::gauss(const double& a)
+{
+    err = a;
+}
+double gauss::get_err()
+{
+    return err;
+}
+void gauss::solver(std::vector<std::vector<double>>& phi, const std::vector<std::vector<double>>& phi_p, const std::vector<std::vector<double>>& ap, const std::vector<std::vector<double>>& ae, const std::vector<std::vector<double>>& aw, const std::vector<std::vector<double>>& an, const std::vector<std::vector<double>>& as,
             const std::vector<std::vector<double>>& ap0, const std::vector<std::vector<double>>& b)
 {
     double rms,prev;
@@ -83,6 +90,6 @@ void Gauss_seidel(std::vector<std::vector<double>>& phi, const std::vector<std::
             phi[i][j] = (b[i][j] + ap0[i][j] * phi_p[i][j]) / ap[i][j];
             rms = std::max(rms, std::abs(phi[i][j] - prev));
         }
-        //std::cout << rms << std::endl;
+        std::cout << rms << std::endl;
     }
 }

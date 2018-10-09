@@ -5,7 +5,7 @@ Ly 1
 alpha 10
 dx 0.01
 dy 0.01
-dt 1
+dt 10000
 runtime 10000
 steady 1
 method 4

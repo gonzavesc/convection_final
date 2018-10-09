@@ -26,7 +26,14 @@
     #define INCLUDE_BND
 #endif
 
-extern double err;
+
 void copyMatrix(std::vector<std::vector<double>>& phi_p, const std::vector<std::vector<double>>& phi);
-void Gauss_seidel(std::vector<std::vector<double>>& phi, const std::vector<std::vector<double>>& phi_p, const std::vector<std::vector<double>>& ap, const std::vector<std::vector<double>>& ae, const std::vector<std::vector<double>>& aw, const std::vector<std::vector<double>>& an, const std::vector<std::vector<double>>& as,
+class gauss{
+    private:
+        double err;
+    public:
+        gauss(const double& a);
+        double get_err();
+        void solver(std::vector<std::vector<double>>& phi, const std::vector<std::vector<double>>& phi_p, const std::vector<std::vector<double>>& ap, const std::vector<std::vector<double>>& ae, const std::vector<std::vector<double>>& aw, const std::vector<std::vector<double>>& an, const std::vector<std::vector<double>>& as,
             const std::vector<std::vector<double>>& ap0, const std::vector<std::vector<double>>& b);
+};

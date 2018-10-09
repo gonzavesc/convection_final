@@ -34,11 +34,12 @@
 
 std::vector<double> properties, diff;
 int Nx, Ny;
-double alpha, err;
+double alpha;
 int main()
 {
     std::vector<double> dat;
     int Method;
+    
     double tot_time(0), runtime;
     dat = readfiledat();
     properties.push_back(dat[0]); properties.push_back(dat[1]);
@@ -47,7 +48,7 @@ int main()
     alpha = dat[4];
     Method = dat[10];
     runtime = dat[8];
-    err = dat[11];
+    gauss Sol(dat[11]);
     std::vector<std::vector<double>> phi(Ny + 1, std::vector<double>(Nx +1, 100));
     std::vector<std::vector<double>> phi_p(Ny + 1, std::vector<double>(Nx +1, 0));
     std::vector<std::vector<double>> Fe(Ny + 1, std::vector<double>(Nx +1, 0));
@@ -87,7 +88,7 @@ int main()
         tot_time+=diff[2];
         copyMatrix(phi_p,phi);
         //std::cout << tot_time << std::endl;
-        Gauss_seidel(phi, phi_p, ap, ae, aw, an, as, ap0, b);
+        Sol.solver(phi, phi_p, ap, ae, aw, an, as, ap0, b);
     }
     exportarMatriu(phi);
 
