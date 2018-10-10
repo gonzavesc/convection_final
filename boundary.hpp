@@ -8,18 +8,16 @@
 
 #include "read.hpp"
 
-#ifndef INCLUDE_IN
-	#include "initialize.hpp"
-	#define INCLUDE_IN
-#endif
-#ifndef INCLUDE_EXP
-    #include "export.hpp"
-    #define INCLUDE_EXP
-#endif
-#ifndef INCLUDE_MET
-    #include "method.hpp"
-    #define INCLUDE_MET
-#endif
+
+#include "initialize.hpp"
+
+
+#include "export.hpp"
+
+
+#include "method.hpp"
+#ifndef INCLUDE_BND
+#define INCLUDE_BND
 class inlet{
     private:
         double alpha;
@@ -31,3 +29,4 @@ class inlet{
 
 void def_bnd(std::vector<std::vector<double>>& ap, std::vector<std::vector<double>>& ae,  std::vector<std::vector<double>>& aw,  std::vector<std::vector<double>>& an, std::vector<std::vector<double>>& as,
              std::vector<std::vector<double>>& ap0,  std::vector<std::vector<double>>& b, inlet& in,  differential& diff);
+#endif

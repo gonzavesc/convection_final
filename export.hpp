@@ -8,9 +8,10 @@
 
 #include "read.hpp"
 
-#ifndef INCLUDE_IN
-	#include "initialize.hpp"
-	#define INCLUDE_IN
-#endif
 
+#include "initialize.hpp"
+
+#ifndef INCLUDE_EXP
+#define INCLUDE_EXP
 void exportarMatriu(const std::vector<std::vector<double>>& phi);
+#endif

@@ -8,28 +8,22 @@
 
 #include "read.hpp"
 
-#ifndef INCLUDE_IN
-	#include "initialize.hpp"
-	#define INCLUDE_IN
-#endif
-#ifndef INCLUDE_EXP
-    #include "export.hpp"
-    #define INCLUDE_EXP
-#endif
 
-#ifndef INCLUDE_MET
-    #include "method.hpp"
-    #define INCLUDE_MET
-#endif
-#ifndef INCLUDE_BND
-    #include "boundary.hpp"
-    #define INCLUDE_BND
-#endif
+#include "initialize.hpp"
 
-#ifndef INCLUDE_GSS
-    #include "gauss.hpp"
-    #define INCLUDE_GSS
-#endif
+
+#include "export.hpp"
+
+
+
+#include "method.hpp"
+
+
+#include "boundary.hpp"
+
+
+#include "gauss.hpp"
+
 
 
 

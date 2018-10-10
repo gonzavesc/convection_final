@@ -8,18 +8,15 @@
 
 #include "read.hpp"
 
-#ifndef INCLUDE_IN
-	#include "initialize.hpp"
-	#define INCLUDE_IN
-#endif
-#ifndef INCLUDE_EXP
-    #include "export.hpp"
-    #define INCLUDE_EXP
-#endif
-#ifndef INCLUDE_MET
-    #include "method.hpp"
-    #define INCLUDE_MET
-#endif
+
+#include "initialize.hpp"
+
+
+#include "export.hpp"
+
+
+#include "method.hpp"
+
 
 double Set_A(const double& P,const double& Method)
 {

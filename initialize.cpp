@@ -9,10 +9,9 @@
 #include "read.hpp"
 
 
-#ifndef INCLUDE_IN
-	#include "initialize.hpp"
-	#define INCLUDE_IN
-#endif
+
+#include "initialize.hpp"
+
 
 double u(const double&x, const double& y)
 {
