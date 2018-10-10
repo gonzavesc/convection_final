@@ -4,11 +4,7 @@
 #include <string> 
 #include <cmath>
 #include <new>
-
-#ifndef INCLUDE_READ
-	#include "read.hpp"
-	#define INCLUDE_READ
-#endif
+#include "read.hpp"
 
 std::vector<double> readfiledat()
 {

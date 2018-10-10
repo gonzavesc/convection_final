@@ -5,10 +5,7 @@
 #include <cmath>
 #include <new>
 
-#ifndef INCLUDE_READ
-	#include "read.hpp"
-	#define INCLUDE_READ
-#endif
+#include "read.hpp"
 
 double u(const double&x, const double& y);
 double v(const double&x, const double& y);

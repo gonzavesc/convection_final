@@ -5,10 +5,9 @@
 #include <cmath> //std::pow abs
 #include <new>
 #include <algorithm>  //std::max
-#ifndef INCLUDE_READ
-	#include "read.hpp"
-	#define INCLUDE_READ
-#endif
+
+#include "read.hpp"
+
 #ifndef INCLUDE_IN
 	#include "initialize.hpp"
 	#define INCLUDE_IN

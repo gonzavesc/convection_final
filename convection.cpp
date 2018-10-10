@@ -5,10 +5,9 @@
 #include <cmath> //std::pow std::abs
 #include <new>
 #include <algorithm>  //std::max
-#ifndef INCLUDE_READ
-	#include "read.hpp"
-	#define INCLUDE_READ
-#endif
+
+#include "read.hpp"
+
 #ifndef INCLUDE_IN
 	#include "initialize.hpp"
 	#define INCLUDE_IN
@@ -51,6 +50,7 @@ int main()
     gauss Sol(dat[11]);
     std::vector<std::vector<double>> phi(Ny + 1, std::vector<double>(Nx +1, 100));
     std::vector<std::vector<double>> phi_p(Ny + 1, std::vector<double>(Nx +1, 0));
+    
     std::vector<std::vector<double>> Fe(Ny + 1, std::vector<double>(Nx +1, 0));
     std::vector<std::vector<double>> Fw(Ny + 1, std::vector<double>(Nx +1, 0));
     std::vector<std::vector<double>> Fn(Ny + 1, std::vector<double>(Nx +1, 0));

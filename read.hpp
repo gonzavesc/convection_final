@@ -4,7 +4,8 @@
 #include <string> 
 #include <cmath>
 #include <new>
-
+#ifndef INCLUDE_READ
+#define INCLUDE_READ
 std::vector<double> readfiledat();
 class properties{
     private:
@@ -23,3 +24,4 @@ class differential{
         double get_dy();
         double get_dt();
 };
+#endif
