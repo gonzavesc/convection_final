@@ -35,7 +35,7 @@ double Set_A(const double& P,const double& Method)
     }
     if (Method == 3) //Power Law
     {
-        A = std::max(0.0, std::pow(1 - 0.5 * std::abs(P), 5));
+        A = std::max(0.0, std::pow(1 - 0.1 * std::abs(P), 5));
     }
     if (Method == 4) //Exponential
     {
